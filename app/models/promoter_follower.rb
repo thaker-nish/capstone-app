@@ -1,0 +1,2 @@
+class PromoterFollower < ApplicationRecord
+end
