@@ -1,0 +1,2 @@
+class ClubPromoter < ApplicationRecord
+end
