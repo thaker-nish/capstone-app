@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161227184612) do
+ActiveRecord::Schema.define(version: 20161227185032) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "guestlists", force: :cascade do |t|
+    t.integer  "club_id"
+    t.integer  "promoter_id"
+    t.integer  "user_id"
+    t.integer  "promotion_id"
+    t.integer  "guests"
+    t.string   "reservation_date"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "promoters", force: :cascade do |t|
     t.string   "name"
@@ -22,6 +33,12 @@ ActiveRecord::Schema.define(version: 20161227184612) do
     t.string   "password_digest"
     t.datetime "created_at",      null: false
     t.datetime "updated_at",      null: false
+  end
+
+  create_table "promotions", force: :cascade do |t|
+    t.string   "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

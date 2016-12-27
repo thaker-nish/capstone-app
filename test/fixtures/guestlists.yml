@@ -1,0 +1,17 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  club_id: 1
+  promoter_id: 1
+  user_id: 1
+  promotion_id: 1
+  guests: 1
+  reservation_date: MyString
+
+two:
+  club_id: 1
+  promoter_id: 1
+  user_id: 1
+  promotion_id: 1
+  guests: 1
+  reservation_date: MyString
