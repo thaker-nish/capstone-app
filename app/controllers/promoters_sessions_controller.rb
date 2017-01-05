@@ -1,0 +1,2 @@
+class PromotersSessionsController < ApplicationController
+end

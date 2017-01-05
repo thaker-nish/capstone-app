@@ -1,0 +1,2 @@
+module PromotersSessionsHelper
+end
