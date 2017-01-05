@@ -1,0 +1,15 @@
+<a href="/promoters_logout">Logout</a>
+<h1><%=@promoter.name%>'s Home page</h1>
+<h2>Email: <%=@promoter.email%></h2>
+<h2>Phone: <%=@promoter.phone%></h2>
+<a href="/">Home</a>
+<h2>Clubs: <%@promoter.clubs.each do |club|%>
+  <ul>
+  <li><a href="/clubs/<%=club.id%>"><%=club.name%></a></li>
+  </ul>
+  <%end%>
+</h2>
+<h2>Followers: <%=@promoter.followers.count%>
+<%@promoter.followers.each do |follower|%>
+<a href="/users/<%=follower.user.id%>"><p><%=follower.user.name%></p></a>
+<%end%>

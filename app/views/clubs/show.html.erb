@@ -1,0 +1,7 @@
+<a href="/">Home</a>
+<h1><%=@club.name%></h1>
+<h3>Email: <%=@club.email%></h3>
+<h3>Phone: <%=@club.phone%></h3>
+<h3>Promoters: <%@club.promoters.each do |promoter|%>
+  <a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a>
+  <%end%></h3>

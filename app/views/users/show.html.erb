@@ -1,0 +1,21 @@
+<a href="/logout">Logout</a>
+<a href="/">Home</a>
+<h1><%=@user.name%>'s Home page</h1>
+<h2>Email: <%=@user.email%></h2>
+<h2>Phone: <%=@user.phone%></h2>
+<h2>Promoters: <%@user.promoters.each do |promoter|%>
+<a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a>
+<%end%></h2>
+<h2>Guestlists:</h2> 
+<%@user.guestlists.each do |guestlist|%>
+<ul>
+<li>Date: <%=guestlist.reservation_date%></li>
+<li>Club: <%=guestlist.club.name%></li>
+<li>Promoter: <%=guestlist.promoter.name%></li>
+<li>Guests: <%=guestlist.guests%></li>
+<li>Promotion: <%=guestlist.promotion.name%></li>
+
+</ul>
+<%end%>
+
+
