@@ -1,0 +1,5 @@
+<a href="/">Home</a>
+<h1>Locations</h1>
+<%@locations.each do |location|%>
+<a href="/clubs/locations/<%=location.id%>"><h2><%=location.name%></h2></a>
+  <%end%>

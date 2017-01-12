@@ -9,7 +9,10 @@
   </ul>
   <%end%>
 </h2>
-<h2>Followers: <%=@promoter.followers.count%>
-<%@promoter.followers.each do |follower|%>
+<h2>Followers: <%=@promoter.promoter_followers.count%>
+<div>
+<button>Follow</button>
+</div>
+<%@promoter.promoter_followers.each do |follower|%>
 <a href="/users/<%=follower.user.id%>"><p><%=follower.user.name%></p></a>
 <%end%>
