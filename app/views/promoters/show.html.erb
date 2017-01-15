@@ -1,20 +1,20 @@
-<a href="/promoters_logout">Logout</a>
-<h1><%=@promoter.name%>'s Home page</h1>
-<h2>Email: <%=@promoter.email%></h2>
-<h2>Phone: <%=@promoter.phone%></h2>
-<a href="/">Home</a>
-<h2>Clubs: <%@promoter.clubs.each do |club|%>
-  <ul>
-  <li><a href="/clubs/<%=club.id%>"><%=club.name%></a></li>
-  </ul>
-  <%end%>
-</h2>
-<h2>Followers: <%=@promoter.promoter_followers.count%>
-<% if current_user && @promoter_followers.first == nil %>
+ <div class="divide80"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                <div class="about-author">
+                <h3><%=@promoter.name%></h3>
+                <h6>Followers: <%=@promoter.promoter_followers.count%></h6>
+                <% if current_promoter %>
+
+<% elsif !current_user %>
+
+<% else %>
+<% if current_user && promoter_followers.first == nil %>
 <div>
 <%= form_tag '/promoters/follow', method: :post do  %> 
 <%= hidden_field_tag :promoter_id, params[:id] %>
-                                    <div class="pull-right">
+                                    <div>
                                         <button type="submit" class="btn btn-theme-dark">Follow</button>
                                     </div>
                                 <% end %>
@@ -22,11 +22,61 @@
 <% else %>
 
 <%= form_tag "/promoters/unfollow/#{@promoter.id}", method: :delete do  %> 
-                                    <div class="pull-right">
+                                    <div>
                                         <button type="submit" class="btn btn-theme-dark">Unfollow</button>
                                     </div>
                                 <% end %>
+  <% end %>
 <% end %>
-<%@promoter.promoter_followers.each do |follower|%>
-<a href="/users/<%=follower.user.id%>"><p><%=follower.user.name%></p></a>
-<%end%>
+                        <img src="img/team-3.jpg" class="img-responsive" alt="">
+                        <p>
+                            <div>Email: <%=@promoter.email%></div>
+                            <div>Phone: <%=@promoter.phone%></div>
+                        </p>
+                    </div><!--about author-->
+                    <div class="divide60"></div>
+                </div><!--col-->
+            </div><!--row for blog post-->
+        </div>
+        <h4 class="margin30">Followers</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                            </tr>
+                        </thead>
+                        <% @promoter.users.each do |follower| %>
+                        <tbody>
+                            <tr>
+                                <td><div><a href="/users/<%=follower.id%>"><%=follower.name%></a></div></td>
+                                <td><%=follower.email%></td>
+                                <td><%=follower.phone%></td>
+                                <%end%>
+                            </tr>     
+                      </tbody>
+                    </table>
+                    <h4 class="margin30">Guestlists</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Club</th>
+                                <th>Promoter</th>
+                                <th>Guests</th>
+                                <th>Promotion</th>
+                            </tr>
+                        </thead>
+                         <%@promoter.guestlists.each do |guestlist|%>
+                        <tbody>
+                            <tr>
+                                <td><%=guestlist.reservation_date%></td>
+                                <td><%=guestlist.club.name%></td>
+                                <td><%=guestlist.user.name%></td>
+                                <td><%=guestlist.guests%></td>
+                                <td><%=guestlist.promotion.name%></td>
+                                <%end%>
+                            </tr>     
+                      </tbody>
+                    </table>

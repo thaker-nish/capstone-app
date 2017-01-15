@@ -25,5 +25,9 @@ class ApplicationController < ActionController::Base
     @locations = Location.all
   end
   helper_method :locations
-  
+
+  def promoter_followers
+    @promoter_followers = PromoterFollower.where(user_id: current_user.id, promoter_id: params[:id])
+  end
+  helper_method :promoter_followers
 end

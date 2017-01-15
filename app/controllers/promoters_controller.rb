@@ -25,7 +25,6 @@ class PromotersController < ApplicationController
   
   def show
     @promoter = Promoter.find_by(id: params[:id])
-    @promoter_followers = PromoterFollower.where(user_id: current_user.id, promoter_id: params[:id])
     render 'show.html.erb'
   end
 
