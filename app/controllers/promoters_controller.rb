@@ -1,5 +1,5 @@
 class PromotersController < ApplicationController
-  before_action :authenticate_promoter!, except: [:index, :show, :new, :create]
+  before_action :authenticate_promoter!, except: [:index, :show, :new, :create, :create_follow, :destroy_unfollow]
   def index
     @promoters = Promoter.all 
     render 'index.html.erb'
@@ -25,6 +25,7 @@ class PromotersController < ApplicationController
   
   def show
     @promoter = Promoter.find_by(id: params[:id])
+    @promoter_followers = PromoterFollower.where(user_id: current_user.id, promoter_id: params[:id])
     render 'show.html.erb'
   end
 
@@ -55,5 +56,18 @@ class PromotersController < ApplicationController
       reservation_date: params[:reservation_date]
     )
     redirect_to "/promoters/#{current_promoter.id}"
+  end
+
+  def create_follow
+    PromoterFollower.create(user_id: current_user.id, promoter_id: params[:promoter_id])
+    redirect_to "/promoters/#{params[:promoter_id]}"
+  end
+
+  def destroy_unfollow
+    # @promoter_follower = PromoterFollower.where(user_id: current_user.id).where(promoter_id: params[:id])
+    @promoter_followers = PromoterFollower.where(user_id: current_user.id, promoter_id: params[:id])
+    @promoter_followers.first.destroy
+    flash[:success] = 'Product successfully destroyed!'
+    redirect_to "/promoters/#{params[:id]}"
   end
 end

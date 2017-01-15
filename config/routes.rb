@@ -17,6 +17,8 @@ Rails.application.routes.draw do
   post '/promoters/promotion' => 'promoters#create_promotion'
   get '/promoters/guestlist/new' => 'promoters#new_guestlist'
   post '/promoters/guestlist' => 'promoters#create_guestlist'
+  post '/promoters/follow' => 'promoters#create_follow'
+  delete '/promoters/unfollow/:id' => 'promoters#destroy_unfollow'
   get '/promoters/:id' => 'promoters#show'
 
   get '/clubs/locations' => 'clubs#index_locations'

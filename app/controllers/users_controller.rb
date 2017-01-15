@@ -23,6 +23,7 @@ class UsersController < ApplicationController
 
   def show
     @user = User.find_by(id: params[:id])
+    @promoter_followers = PromoterFollower.where(user_id: @user.id)
     render 'show.html.erb'
   end
 end

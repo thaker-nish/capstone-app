@@ -10,9 +10,23 @@
   <%end%>
 </h2>
 <h2>Followers: <%=@promoter.promoter_followers.count%>
+<% if current_user && @promoter_followers.first == nil %>
 <div>
-<button>Follow</button>
+<%= form_tag '/promoters/follow', method: :post do  %> 
+<%= hidden_field_tag :promoter_id, params[:id] %>
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-theme-dark">Follow</button>
+                                    </div>
+                                <% end %>
 </div>
+<% else %>
+
+<%= form_tag "/promoters/unfollow/#{@promoter.id}", method: :delete do  %> 
+                                    <div class="pull-right">
+                                        <button type="submit" class="btn btn-theme-dark">Unfollow</button>
+                                    </div>
+                                <% end %>
+<% end %>
 <%@promoter.promoter_followers.each do |follower|%>
 <a href="/users/<%=follower.user.id%>"><p><%=follower.user.name%></p></a>
 <%end%>

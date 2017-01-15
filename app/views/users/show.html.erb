@@ -3,9 +3,12 @@
 <h1><%=@user.name%>'s Home page</h1>
 <h2>Email: <%=@user.email%></h2>
 <h2>Phone: <%=@user.phone%></h2>
-<h2>Promoters: <%@user.promoters.each do |promoter|%>
-<a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a>
-<%end%></h2>
+<h2>
+  Promoters:
+  <% @user.promoters.each do |promoter| %>
+    <a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a>
+  <%end%>
+</h2>
 <h2>Guestlists:</h2> 
 <%@user.guestlists.each do |guestlist|%>
 <ul>
