@@ -7,4 +7,5 @@ class Promoter < ApplicationRecord
   has_many :promotions, through: :guestlists
   has_many :guestlists
   has_many :guests, through: :guestlists
+  has_many :images
 end

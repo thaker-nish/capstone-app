@@ -6,4 +6,5 @@ class User < ApplicationRecord
   has_many :clubs, through: :guestlists
   has_many :promotions, through: :guestlists
   has_many :guests, through: :guestlists
+  has_many :images
 end

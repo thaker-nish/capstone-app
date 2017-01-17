@@ -6,4 +6,5 @@ class Club < ApplicationRecord
   has_many :users, through: :guestlists
   has_many :guests, through: :guestlists
   has_many :club_locations
+  has_many :images
 end

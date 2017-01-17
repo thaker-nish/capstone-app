@@ -8,14 +8,14 @@
             </div>
         </div><!--breadcrumbs-->
         <div class="divide80"></div>
-        <%@locations.each do |location|%>
         <div class="container">
             <div class="portfolio-cube">
                 <div id="grid-container" class="cbp">
+        <%@locations.each do |location|%>
                     <div class="cbp-item graphic">
                         <div class="cbp-caption">
                             <div class="cbp-caption-defaultWrap">
-                                <img src="/img/img-1.jpg" alt="">
+                                <img src="<%=location.images.first.url%>" alt="">
                             </div>
                             <div class="cbp-caption-activeWrap">
                                 <div class="cbp-l-caption-alignCenter">
@@ -27,7 +27,7 @@
                         </div>
                         <div class="cbp-l-grid-projects-title"><%= location.name %></div>
                     </div>
-                    <% end %>
+<% end %>
+                </div>
             </div>
-         </div>
-     </div>
+</div>

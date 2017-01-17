@@ -14,7 +14,7 @@ $(document).ready(function () {
     });
     
     //on hover dropdown menu
-     $(".navbar-nav>.dropdown").hover(function () {
+     $(".navbar-nav>.dropdown").hover(function() {
     $(this).toggleClass("open");
  });
 });
@@ -134,7 +134,7 @@ jQuery(document).ready(function ($) {
     });
 });
 //MAGNIFIC POPUP
-$(document).ready(function () {
+$(document).ready(function() {
 $('.show-image').magnificPopup({type: 'image'});
 });
 
