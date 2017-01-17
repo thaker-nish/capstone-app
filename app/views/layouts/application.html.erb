@@ -161,6 +161,8 @@
                                 <li><a href="/promoters/guestlist/new">New Guestlist</a></li>
                             </ul>
                         </li>
+                        <% elsif current_user %>
+
                         <% else %>
                          <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown">Promoter <i class="fa fa-angle-down"></i></a>
@@ -171,7 +173,7 @@
                         <% end %>
                         <!--menu Portfolio li end here-->
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">Locations <i class="fa fa-angle-down"></i></a>
+                            <a href="/clubs/locations" class="dropdown-toggle" data-toggle="dropdown">Locations <i class="fa fa-angle-down"></i></a>
                             <ul class="dropdown-menu" role="menu">
                             <% locations.each do |location| %>
                                 <li><a href="/clubs/locations/<%= location.id %>"><%=location.name%></a></li>
