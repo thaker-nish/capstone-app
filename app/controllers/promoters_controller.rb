@@ -46,13 +46,19 @@ class PromotersController < ApplicationController
   end
 
   def create_guestlist
+    date_info = params["reservation_date"]
+    user = User.find_by(email: params[:user_email])
     Guestlist.create(
       club_id: params[:club_id],
       promoter_id: current_promoter.id,
-      user_id: params[:user_id],
+      user_id: user.id,
       promotion_id: params[:promotion_id],
       guests: params[:guests],
-      reservation_date: params[:reservation_date]
+      reservation_date: DateTime.new(
+        date_info["reservation_date(1i)"].to_i,
+        date_info["reservation_date(2i)"].to_i,
+        date_info["reservation_date(3i)"].to_i
+      ).strftime("%m/%d/%Y")
     )
     redirect_to "/promoters/#{current_promoter.id}"
   end

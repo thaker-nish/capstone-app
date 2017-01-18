@@ -4,7 +4,11 @@
                 <div class="col-md-8">
                 <div class="about-author">
                 <h3><%=@user.name%></h3>
-                        <img src="img/team-3.jpg" class="img-responsive" alt="">
+                <% if @user.images.first === nil  %>
+                <img src="/img/defaultprofilepic.jpg" >
+                <% else %>
+                        <img src="<%=@user.images.first.url%>"  class="img-responsive" alt="">
+                        <% end %>
                         <p>
                             <div>Email: <%=@user.email%></div>
                             <div>Phone: <%=@user.phone%></div>

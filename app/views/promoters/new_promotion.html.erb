@@ -3,12 +3,12 @@
 
 <%= form_tag '/promoters/promotion', method: :post do  %>
   <div class="form-group">
-    <%= label_tag :name %>
+    <%= label_tag :description %>
     <%= text_field_tag :name %>
   </div>
   <div class="form-group">
     <%= label_tag :club %>
-    <%= text_field_tag :club_name %>
+    <%= collection_select("",:club_name, current_promoter.clubs, :name, :name, prompt: "Select one...") %>
   </div>
   <div>
     <%= hidden_field_tag :promoter_id, current_promoter.id %>

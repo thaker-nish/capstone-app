@@ -1,7 +1,33 @@
-<a href="/">Home</a>
-<h1><%=@location.name%></h1>
-<% @location.clubs.all.each do |club| %>
-<div>
-  <a href= "/clubs/<%=club.id%>"><h4><%= club.name %></h4></a>
-</div>
+<div class="breadcrumb-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4><%=@location.name%></h4>
+                    </div>
+                </div>
+            </div>
+        </div><!--breadcrumbs-->
+        <div class="divide80"></div>
+        <div class="container">
+            <div class="portfolio-cube">
+                <div id="grid-container" class="cbp">
+        <% @location.clubs.all.each do |club| %>
+                    <div class="cbp-item graphic">
+                        <div class="cbp-caption">
+                            <div class="cbp-caption-defaultWrap">
+                                <img src="<%=club.images.first.url%>" alt="">
+                            </div>
+                            <div class="cbp-caption-activeWrap">
+                                <div class="cbp-l-caption-alignCenter">
+                                    <div class="cbp-l-caption-body">
+                                        <a href="/clubs/<%=club.id%>" class="btn btn-primary">Club</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="cbp-l-grid-projects-title"><%= club.name %></div>
+                    </div>
 <% end %>
+                </div>
+            </div>
+</div>

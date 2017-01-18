@@ -1,6 +1,6 @@
 <a href="/">Home</a>
 <h1>Promoters</h1>
-<%@promoters.each do |promoter|%>
+<%@promoters.order("name").each do |promoter|%>
 <h3><a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a></h3>
 <p>Email: <%=promoter.email%></p>
 <p>Phone: <%=promoter.phone%></p>

@@ -28,7 +28,11 @@
                                 <% end %>
   <% end %>
 <% end %>
-                        <img src="img/team-3.jpg" class="img-responsive" alt="">
+                       <% if @promoter.images.first === nil  %>
+                <img src="/img/defaultprofilepic.jpg" >
+                <% else %>
+                        <img src="<%=@promoter.images.first.url%>"  class="img-responsive" alt="">
+                        <% end %>
                         <p>
                             <div>Email: <%=@promoter.email%></div>
                             <div>Phone: <%=@promoter.phone%></div>
@@ -68,7 +72,7 @@
                                 <th>Promotion</th>
                             </tr>
                         </thead>
-                         <%@promoter.guestlists.each do |guestlist|%>
+                         <%@promoter.guestlists.order("reservation_date").each do |guestlist|%>
                         <tbody>
                             <tr>
                                 <td><%=guestlist.reservation_date%></td>
