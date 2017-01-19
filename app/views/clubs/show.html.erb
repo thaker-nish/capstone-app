@@ -6,12 +6,11 @@
   <a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a>
   <%end%></h3>
    <div class="container">
-   <h6>Address:<%= @club.address %></h6>
             <h4 class="margin30"></h4>
             <div id="map-canvas" style="height: 250px;width: 30%;"></div>
+            <h6>Address: <span id="club-address"><%= @club.address %><span></h6>
             <div class="divide40"></div>
             </div>
-            <h6>Address:<%= @club.address %></h6>
            <script src="/js/jquery.min.js"></script>        
         <!--bootstrap js plugin-->
         <script src="/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>       
@@ -40,40 +39,42 @@
         <!--customizable plugin edit according to your needs-->
         <script src="/js/custom.js" type="text/javascript"></script>
  <!--gmap js-->
-        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=true"></script>
+        <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDNZfr6yDBxVOrP5rlpCwaZkzr8qn3yO0A & sensor=true"></script>
         <script src="/js/gmaps.js" type="text/javascript"></script>
-        <script type="text/javascript">
+        <script  type="text/javascript">
             var myLatlng;
             var map;
             var marker;
 
             function initialize() {
-                myLatlng = new google.maps.LatLng(37.397802, -121.890288);
-
+              /* global $, google */
+              var address = $("#club-address").text();
+              console.log('the address is', address);
+              var geocoder = new google.maps.Geocoder();
+              geocoder.geocode({'address': address}, function(results, status) {
+                console.log('geocoder results', results, status);
+                myLatlng = results[0].geometry.location; //new google.maps.LatLng(37.397802, -121.890288);
                 var mapOptions = {
-                    zoom: 13,
-                    center: myLatlng,
-                    mapTypeId: google.maps.MapTypeId.ROADMAP,
-                    scrollwheel: false,
-                    draggable: false
+                  zoom: 13,
+                  center: myLatlng,
+                  mapTypeId: google.maps.MapTypeId.ROADMAP,
+                  scrollwheel: true,
+                  draggable: true
                 };
                 map = new google.maps.Map(document.getElementById('map-canvas'), mapOptions);
-
-                var contentString = '<p style="line-height: 20px;"><strong>assan Template</strong></p><p>Vailshali, assan City, 302012</p>';
-
+                var contentString = '<p style="line-height: 20px;">' + address + '</p>';
                 var infowindow = new google.maps.InfoWindow({
-                    content: contentString
+                  content: contentString
                 });
-
                 marker = new google.maps.Marker({
-                    position: myLatlng,
-                    map: map,
-                    title: 'Marker'
+                  position: myLatlng,
+                  map: map,
+                  title: 'Marker'
                 });
-
                 google.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open(map, marker);
+                  infowindow.open(map, marker);
                 });
+              });
             }
 
             google.maps.event.addDomListener(window, 'load', initialize);
