@@ -11,7 +11,7 @@
         <div class="container">
             <div class="portfolio-cube">
                 <div id="grid-container" class="cbp">
-        <% @location.clubs.all.each do |club| %>
+        <% @location.clubs.all.order("name").each do |club| %>
                     <div class="cbp-item graphic">
                         <div class="cbp-caption">
                             <div class="cbp-caption-defaultWrap">

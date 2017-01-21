@@ -1,30 +1,47 @@
-<a href="/">Home</a> <a href="/promoters_login">Login!</a>
-<h1>Create a guestlist</h1>
-
-<%= form_tag '/promoters/guestlist', method: :post do  %>
-  <div class="form-group">
-    <%= label_tag :club_id %>
-    <%= collection_select("",:club_id, current_promoter.clubs, :id, :name, prompt: "Select one...") %>
-
-  </div>
-  <div class="form-group">
-    <%= hidden_field_tag :promoter_id, current_promoter.id %>
-  </div>
-   <div class="form-group">
-    <%= label_tag :user_email %>
-    <%= text_field_tag :user_email, "", required:true %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :promotion_id %>
-    <%= collection_select("",:promotion_id, Promotion.all, :id, :name, prompt: "Select one...") %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :guests %>
-    <%= number_field("", :guests, in: 1..100) %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :reservation_date %>
-    <%= date_select :reservation_date, :reservation_date %>
-  </div>
-  <%= submit_tag "Submit", class:"btn btn-primary" %>
-<% end %>
+ <div class="breadcrumb-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Promotions</h4>
+                    </div>
+                </div>
+            </div>
+        </div><!--breadcrumbs-->
+        <div class="divide80"></div>
+        <div class="container">
+            <div class="row">  
+                <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                    <div class="login-form">
+                        <h3>Create Guestlist</h3>
+                        <%= form_tag '/promoters/guestlist', method: :post do  %>
+                         <form role="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Club</label>
+                            <%= collection_select("",:club_id, current_promoter.clubs, :id, :name, prompt: "Select one...") %>
+                        </div>
+                        <div class="form-group">
+                             <%= hidden_field_tag :promoter_id, current_promoter.id %>
+                        </div>   
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">User Email</label>
+                            <%= text_field_tag :user_email, "", required:true %>
+                        </div>   
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Promotion</label>
+                             <%= collection_select("",:promotion_id, Promotion.where(promoter_id: current_promoter.id), :id, :name, prompt: "Select one...") %>
+                        </div>
+                          <div class="form-group">
+                            <label for="exampleInputEmail1">Guests</label>
+                             <%= number_field("", :guests, in: 1..100) %>
+                        </div>               
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Reservation Date</label>
+                             <%= date_select :reservation_date, :reservation_date %>
+                        </div>                  
+                        <button type="submit" class="btn btn-theme-bg">Submit</button>
+                    </form>
+                    <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>

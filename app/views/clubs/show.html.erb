@@ -1,14 +1,46 @@
-<a href="/">Home</a>
-<a href="<%=@club.url%>"><h1><%=@club.name%></h1></a>
-<h3>Email: <%=@club.email%></h3>
-<h3>Phone: <%=@club.phone%></h3>
-<h3>Promoters: <%@club.promoters.each do |promoter|%>
-  <a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a>
-  <%end%></h3>
+ <div class="divide80"></div>
+        <div class="container">
+            <div class="row">
+                <div class="col-md-8">
+                <div class="about-club">
+                <a href="http://<%=@club.url%>"><h1><%=@club.name%></h1></a>
+                <img src="<%=@club.images.first.url%>"   alt="">
+                        <p>
+                            <div><h3>Email: <%=@club.email%></h3></div>
+                            <div><h3>Phone: <%=@club.phone%></h3></div>
+                            <div><h3>Website: <a href="http://<%=@club.url%>"><%=@club.url %></h3></a></div>
+                        </p>
+                    </div><!--about author-->
+                    <div class="divide60"></div>
+                </div><!--col-->
+            </div><!--row for blog post-->
+        </div>
+        
+        <h4 class="margin30">Promoters</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Followers</th>
+                            </tr>
+                        </thead>
+                        <% @club.promoters.order("name").each do |promoter| %>
+                        <tbody>
+                            <tr>
+                                <td><div><a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a></div></td>
+                                <td><%=promoter.email%></td>
+                                <td><%=promoter.phone%></td>
+                                <td><%=promoter.promoter_followers.count%></td>
+                                <%end%>
+                            </tr>     
+                      </tbody>
+                    </table>
    <div class="container">
             <h4 class="margin30"></h4>
             <div id="map-canvas" style="height: 250px;width: 30%;"></div>
-            <h6>Address: <span id="club-address"><%= @club.address %><span></h6>
+            <h6><span id="club-address"><%= @club.address %><span></h6>
             <div class="divide40"></div>
             </div>
            <script src="/js/jquery.min.js"></script>        
@@ -55,7 +87,7 @@
                 console.log('geocoder results', results, status);
                 myLatlng = results[0].geometry.location; //new google.maps.LatLng(37.397802, -121.890288);
                 var mapOptions = {
-                  zoom: 13,
+                  zoom: 14,
                   center: myLatlng,
                   mapTypeId: google.maps.MapTypeId.ROADMAP,
                   scrollwheel: true,

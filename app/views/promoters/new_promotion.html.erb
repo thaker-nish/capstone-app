@@ -1,17 +1,41 @@
-<a href="/">Home</a> <a href="/promoters_login">Login!</a>
-<h1>Create a promotion</h1>
-
-<%= form_tag '/promoters/promotion', method: :post do  %>
-  <div class="form-group">
-    <%= label_tag :description %>
-    <%= text_field_tag :name %>
-  </div>
-  <div class="form-group">
-    <%= label_tag :club %>
-    <%= collection_select("",:club_name, current_promoter.clubs, :name, :name, prompt: "Select one...") %>
-  </div>
-  <div>
-    <%= hidden_field_tag :promoter_id, current_promoter.id %>
-  </div>
-  <%= submit_tag "Submit", class:"btn btn-primary" %>
-<% end %>
+<div class="breadcrumb-wrap">
+            <div class="container">
+                <div class="row">
+                    <div class="col-sm-6">
+                        <h4>Promotions</h4>
+                    </div>
+                </div>
+            </div>
+        </div><!--breadcrumbs-->
+        <div class="divide80"></div>
+        <div class="container">
+            <div class="row">  
+                <div class="col-md-8 col-sm-8 col-md-offset-2 col-sm-offset-2">
+                    <div class="login-form">
+                        <h3>Create Guestlist</h3>
+                        <%= form_tag '/promoters/promotion', method: :post do  %>
+                         <form role="form">
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Description</label>
+                            <%= text_field_tag :name %>
+                        </div>
+                        <div class="form-group">
+                            <label for="exampleInputEmail1">Club</label>
+                            <%= collection_select("",:club_name, current_promoter.clubs, :name, :name, prompt: "Select one...") %>
+                        </div>   
+                        <div class="form-group">
+                             <%= hidden_field_tag :promoter_id, current_promoter.id %>
+                        </div>           
+                        <button type="submit" class="btn btn-theme-bg">Submit</button>
+                    </form>
+                    <% end %>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="divide20"></div>
+           <div align="center">
+        <h3>Your Promotions</h3>
+        <% current_promoter.promotions.each do |promotion| %>
+        <div><%= promotion.name %></div>
+          <% end %>

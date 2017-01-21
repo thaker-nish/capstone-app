@@ -10,8 +10,8 @@
                         <img src="<%=@user.images.first.url%>"  class="img-responsive" alt="">
                         <% end %>
                         <p>
-                            <div>Email: <%=@user.email%></div>
-                            <div>Phone: <%=@user.phone%></div>
+                            <div><h6>Email: <%=@user.email%></h6></div>
+                            <div><h6>Phone: <%=@user.phone%></h6></div>
                         </p>
                     </div><!--about author-->
                     <div class="divide60"></div>
@@ -23,14 +23,16 @@
                         <thead>
                             <tr>
                                 <th>Name</th>
+                                <th>Location</th>
                                 <th>Email</th>
                                 <th>Phone</th>
                             </tr>
                         </thead>
-                        <% @user.promoters.each do |promoter| %>
+                        <% @user.promoters.order("name").each do |promoter| %>
                         <tbody>
                             <tr>
                                 <td><div><a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a></div></td>
+                                <td><%=promoter.clubs.first.club_locations.first.location.name%></td>
                                 <td><%=promoter.email%></td>
                                 <td><%=promoter.phone%></td>
                                 <%end%>
@@ -42,16 +44,18 @@
                         <thead>
                             <tr>
                                 <th>Date</th>
+                                <th>Location</th>
                                 <th>Club</th>
                                 <th>Promoter</th>
                                 <th>Guests</th>
                                 <th>Promotion</th>
                             </tr>
                         </thead>
-                         <%@user.guestlists.each do |guestlist|%>
+                         <%@user.guestlists.order("reservation_date").each do |guestlist|%>
                         <tbody>
                             <tr>
                                 <td><%=guestlist.reservation_date%></td>
+                                <td><%=guestlist.promoter.clubs.first.club_locations.first.location.name%></td>
                                 <td><%=guestlist.club.name%></td>
                                 <td><%=guestlist.promoter.name%></td>
                                 <td><%=guestlist.guests%></td>
