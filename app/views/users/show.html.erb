@@ -18,6 +18,7 @@
                 </div><!--col-->
             </div><!--row for blog post-->
         </div>
+        <% if current_user %>
         <h4 class="margin30">Promoters</h4>
                     <table class="table table-hover">
                         <thead>
@@ -64,6 +65,5 @@
                             </tr>     
                       </tbody>
                     </table>
-
-
-
+                    <%else%>
+                    <%end%>

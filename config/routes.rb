@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   get '/' => 'pages#home'
-  get '/signup' => 'users#new'
   post '/users' => 'users#create'
   get '/login' => 'sessions#new'
   post '/login' => 'sessions#create'
@@ -19,9 +18,13 @@ Rails.application.routes.draw do
   post '/promoters/guestlist' => 'promoters#create_guestlist'
   post '/promoters/follow' => 'promoters#create_follow'
   delete '/promoters/unfollow/:id' => 'promoters#destroy_unfollow'
+  get '/promoters/clubs/new' => 'promoters#new_club'
+  post '/promoters/clubs' => 'promoters#create_club'
   get '/promoters/:id' => 'promoters#show'
+  post '/promoters/comments' => 'promoters#create_comment'
 
   get '/clubs/locations' => 'clubs#index_locations'
   get '/clubs/locations/:id' => 'clubs#show_locations'
   get '/clubs/:id' => 'clubs#show'
+
 end

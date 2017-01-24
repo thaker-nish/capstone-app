@@ -1,10 +1,27 @@
-<a href="/">Home</a>
-<h1>Promoters</h1>
-<%@promoters.order("name").each do |promoter|%>
-<h3><a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a></h3>
-<p>Email: <%=promoter.email%></p>
-<p>Phone: <%=promoter.phone%></p>
-<p>Clubs: <%promoter.clubs.each do |club|%>
-<p><%=club.name%></p></p>
-<%end%>
-  <%end%>
+ <h4 class="margin30">Promoters</h4>
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Location</th>
+                                <th>Email</th>
+                                <th>Phone</th>
+                                <th>Followers</th>
+                            </tr>
+                        </thead>
+                        <% @promoters.order("name").each do |promoter| %>
+                        <tbody>
+                            <tr>
+                                <td><div><a href="/promoters/<%=promoter.id%>"><%=promoter.name%></a></div></td>
+                                <% if promoter.clubs.first === nil %>
+                                <td></td>
+                                <% else %>
+                                <td><%=promoter.clubs.first.club_locations.first.location.name%></td>
+                                <%end%>
+                                <td><%=promoter.email%></td>
+                                <td><%=promoter.phone%></td>
+                                <td><%=promoter.promoter_followers.count%></td>
+                                <%end%>
+                            </tr>     
+                      </tbody>
+                    </table>

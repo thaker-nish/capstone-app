@@ -42,6 +42,10 @@
                 </div><!--col-->
             </div><!--row for blog post-->
         </div>
+        <h4 class="margin30">Clubs</h4>
+        <% @promoter.clubs.each do |club| %>
+        <p><a href="/clubs/<%=club.id%>"><%= club.name %></a></p>
+        <%end%>
         <h4 class="margin30">Followers</h4>
                     <table class="table table-hover">
                         <thead>
@@ -61,13 +65,14 @@
                             </tr>     
                       </tbody>
                     </table>
+                    <% if !current_user && current_promoter.id === @promoter.id %>
                     <h4 class="margin30">Guestlists</h4>
                     <table class="table table-hover">
                         <thead>
                             <tr>
                                 <th>Date</th>
                                 <th>Club</th>
-                                <th>Promoter</th>
+                                <th>User</th>
                                 <th>Guests</th>
                                 <th>Promotion</th>
                             </tr>
@@ -84,3 +89,51 @@
                             </tr>     
                       </tbody>
                     </table>
+                    <%else%>
+                    <%end%>
+                        <h3><%=@promoter.comments.count%> Comments</h3>
+                        <% @comment.each do |comment|%>
+                     <div class="comment-post">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div class="comment-list">
+                                    <h4>< <% if comment.user.images.first === nil  %>
+                <img src="/img/defaultprofilepic.jpg">
+                <% else %>
+                        <img src="<%=comment.user.images.first.url%>"  class="img-responsive" alt="">
+                        <% end %>
+                                      by <%=comment.user.name%>
+                                    </h4>
+                                    
+                                        <%=comment.body%>
+                                    
+                                </div><!--comments list-->
+                            </div>
+                            </div>
+                        </div>
+                                <%end%>
+                    </div><!--comments-->
+                            <% if current_user %>
+                    <div class="comment-form">
+                        <h3>Leave Comment</h3>
+                        <div class="form-contact">
+                         <%= form_tag '/promoters/comments', method: :post do  %>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="message">Comment</label>
+                                    <%= text_area_tag :body, "", required:true, class:"form-control" %>
+                                </div>                      
+                                <div class="form-group">
+                                    <%= hidden_field_tag :promoter_id, params[:id] %>
+                                </div>
+                                <div class="form-group">
+                                    <%= hidden_field_tag :user_id, current_user.id %>
+                                </div>
+                                <button type="submit" class="btn btn-theme-bg btn-lg pull-right">Comment</button>
+                            </form>
+                            <%end%>
+                        </div>
+                    </div>
+                    <%else%>
+                    <%end%>
+                

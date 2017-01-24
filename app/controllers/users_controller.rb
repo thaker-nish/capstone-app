@@ -1,8 +1,4 @@
 class UsersController < ApplicationController
-  def new
-    render 'new.html.erb'
-  end
-
   def create
     user = User.new(
       name: params[:name],
@@ -17,13 +13,19 @@ class UsersController < ApplicationController
       redirect_to '/'
     else
       flash[:warning] = 'Invalid email or password!'
-      redirect_to '/signup'
+      redirect_to '/login'
     end
   end
 
   def show
     @user = User.find_by(id: params[:id])
     @promoter_followers = PromoterFollower.where(user_id: @user.id)
-    render 'show.html.erb'
+    if current_promoter || current_user.id === @user.id
+      render 'show.html.erb'
+  elsif current_user
+    redirect_to "/users/#{current_user.id}"
+  else
+    redirect_to '/login'
+    end
   end
 end

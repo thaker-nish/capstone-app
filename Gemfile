@@ -33,6 +33,8 @@ gem 'jbuilder', '~> 2.5'
 # gem 'bcrypt', '~> 3.1.7'
 gem 'strftime', '~> 1.0'
 gem 'twilio-ruby'
+gem 'private_pub'
+gem 'thin'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 

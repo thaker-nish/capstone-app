@@ -1,5 +1,5 @@
 class PromotersController < ApplicationController
-  before_action :authenticate_promoter!, except: [:index, :show, :new, :create, :create_follow, :destroy_unfollow]
+  before_action :authenticate_promoter!, except: [:index, :show, :new, :create, :create_follow, :destroy_unfollow, :create_comment]
   def index
     @promoters = Promoter.all 
     render 'index.html.erb'
@@ -25,7 +25,13 @@ class PromotersController < ApplicationController
   
   def show
     @promoter = Promoter.find_by(id: params[:id])
-    render 'show.html.erb'
+    @comment = Comment.where(promoter_id: params[:id])
+    @user = User.all
+    if current_user || current_promoter
+      render 'show.html.erb'
+  else
+    redirect_to '/login'
+    end
   end
 
   def new_promotion
@@ -74,5 +80,26 @@ class PromotersController < ApplicationController
     @promoter_followers.first.destroy
     flash[:success] = 'Product successfully destroyed!'
     redirect_to "/promoters/#{params[:id]}"
+  end
+
+  def new_club
+    render 'new_club.html.erb'
+  end
+
+  def create_club
+    ClubPromoter.create(
+      club_id: params[:club_id],
+      promoter_id: current_promoter.id
+      )
+    redirect_to "/promoters/#{current_promoter.id}"
+  end
+
+  def create_comment
+    Comment.create(
+      body: params[:body],
+      promoter_id: params[:promoter_id],
+      user_id: current_user.id
+      )
+    redirect_to "/promoters/#{params[:promoter_id]}"
   end
 end
