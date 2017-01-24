@@ -5,7 +5,7 @@
                 <div class="about-author">
                 <h3><%=@user.name%></h3>
                 <% if current_promoter %>
-                <button class="btn btn-theme-bg"><a href="/messages/<%=@user.id%>">Message</button></h4>
+                <a href="/messages/<%=@user.id%>"><button class="btn btn-theme-dark">Message</button></a>
                 <%else%>
                 <%end%>
                 <% if @user.images.first === nil  %>

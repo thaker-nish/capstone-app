@@ -31,6 +31,23 @@ class MessagesController < ApplicationController
       @messages.push({sender_name: promoter_message.promoter.name, body: promoter_message.body, created_at: promoter_message.created_at.strftime("%b %e, %l:%M %p")})
       @messages = @messages.sort_by { |message| message[:created_at] }
     end
+  end
 
+  def create_user_message
+    UserMessage.create(
+      body: params[:body],
+      promoter_id: params[:promoter_id],
+      user_id: current_user.id
+      )
+    redirect_to "/messages/#{params[:promoter_id]}"
+  end
+
+  def create_promoter_message
+    PromoterMessage.create(
+      body: params[:body],
+      promoter_id: current_promoter.id,
+      user_id: params[:user_id]
+      )
+    redirect_to "/messages/#{params[:user_id]}"
   end
 end

@@ -28,5 +28,7 @@ Rails.application.routes.draw do
   get '/clubs/:id' => 'clubs#show'
 
   get '/messages/:id' => 'messages#show'
+  post '/user_messages' => 'messages#create_user_message'
+  post '/promoter_messages' => 'messages#create_promotion_message'
 
 end

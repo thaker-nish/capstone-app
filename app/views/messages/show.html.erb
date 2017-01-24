@@ -2,3 +2,45 @@
 <% @messages.each do |message| %>
   <p>(<%= message[:created_at] %>) <%=message[:sender_name] %>: <%=message[:body]%></p>
 <% end %>
+<% if current_user %>
+  <div class="comment-form">
+                        <h3></h3>
+                        <div class="form-contact">
+                         <%= form_tag '/user_messages', method: :post do  %>
+                            <form role="form">
+                                <div class="form-group">
+                                    <label for="message">Comment</label>
+                                    <%= text_area_tag :body, "", required:true, class:"form-control" %>
+                                </div>                      
+                                <div class="form-group">
+                                    <%= hidden_field_tag :promoter_id, params[:id] %>
+                                </div>
+                                <div class="form-group">
+                                    <%= hidden_field_tag :user_id, current_user.id %>
+                                </div>
+                                <button type="submit" class="btn btn-theme-bg btn-lg pull-right">Comment</button>
+                            </form>
+                            <%end%>
+                        </div>
+                    </div>
+                    <%else current_promoter %>
+                     <div class="comment-form">
+                        <h3></h3>
+                        <div class="form-contact">
+                         <%= form_tag '/promoter_messages', method: :post do  %>
+                            <form role="form">
+                                <div class="form-group">
+                                    <%= text_area_tag :body, "", required:true, class:"form-control" %>
+                                </div>                      
+                                <div class="form-group">
+                                    <%= hidden_field_tag promoter_id: current_promoter.id %>
+                                </div>
+                                <div class="form-group">
+                                    <%= hidden_field_tag :user_id, params[:id] %>
+                                </div>
+                                <button type="submit" class="btn btn-theme-bg btn-lg pull-right">Comment</button>
+                            </form>
+                            <%end%>
+                        </div>
+                    </div>
+                    <%end%>

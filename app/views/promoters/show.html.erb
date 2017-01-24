@@ -4,10 +4,6 @@
                 <div class="col-md-8">
                 <div class="about-author">
                 <h3><%=@promoter.name%></h3> 
-                <% if current_user %>
-                <button class="btn btn-theme-bg"><a href="/messages/<%=@promoter.id%>">Message</button></h4>
-                <%else%>
-                <%end%>
                 <h6>Followers: <%=@promoter.promoter_followers.count%></h6>
                 <% if current_promoter %>
 
@@ -19,7 +15,7 @@
 <%= form_tag '/promoters/follow', method: :post do  %> 
 <%= hidden_field_tag :promoter_id, params[:id] %>
                                     <div>
-                                        <button type="submit" class="btn btn-theme-dark">Follow</button>
+                                        <button style='float: right;' type="submit" class="btn btn-theme-dark">Follow</button>
                                     </div>
                                 <% end %>
 </div>
@@ -27,11 +23,15 @@
 
 <%= form_tag "/promoters/unfollow/#{@promoter.id}", method: :delete do  %> 
                                     <div>
-                                        <button type="submit" class="btn btn-theme-dark">Unfollow</button>
+                                        <button style='float: right;' type="submit" class="btn btn-theme-dark">Unfollow</button>
                                     </div>
                                 <% end %>
   <% end %>
 <% end %>
+                <% if current_user %>
+                <a href="/messages/<%=@promoter.id%>"><button  style='float: right; margin-right:20px;' class="btn btn-theme-dark">Message</button></a>
+                <%else%>
+                <%end%>
                        <% if @promoter.images.first === nil  %>
                 <img src="/img/defaultprofilepic.jpg" >
                 <% else %>
