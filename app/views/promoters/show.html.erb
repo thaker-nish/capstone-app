@@ -3,7 +3,11 @@
             <div class="row">
                 <div class="col-md-8">
                 <div class="about-author">
-                <h3><%=@promoter.name%></h3>
+                <h3><%=@promoter.name%></h3> 
+                <% if current_user %>
+                <button class="btn btn-theme-bg"><a href="/messages/<%=@promoter.id%>">Message</button></h4>
+                <%else%>
+                <%end%>
                 <h6>Followers: <%=@promoter.promoter_followers.count%></h6>
                 <% if current_promoter %>
 

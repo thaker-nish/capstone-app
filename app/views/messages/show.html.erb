@@ -1,0 +1,4 @@
+<h1>Messages</h1>
+<% @messages.each do |message| %>
+  <p>(<%= message[:created_at] %>) <%=message[:sender_name] %>: <%=message[:body]%></p>
+<% end %>

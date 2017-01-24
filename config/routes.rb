@@ -27,4 +27,6 @@ Rails.application.routes.draw do
   get '/clubs/locations/:id' => 'clubs#show_locations'
   get '/clubs/:id' => 'clubs#show'
 
+  get '/messages/:id' => 'messages#show'
+
 end

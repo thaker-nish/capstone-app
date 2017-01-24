@@ -4,6 +4,10 @@
                 <div class="col-md-8">
                 <div class="about-author">
                 <h3><%=@user.name%></h3>
+                <% if current_promoter %>
+                <button class="btn btn-theme-bg"><a href="/messages/<%=@user.id%>">Message</button></h4>
+                <%else%>
+                <%end%>
                 <% if @user.images.first === nil  %>
                 <img src="/img/defaultprofilepic.jpg" >
                 <% else %>

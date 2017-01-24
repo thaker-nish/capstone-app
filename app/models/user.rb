@@ -10,4 +10,6 @@ class User < ApplicationRecord
   has_many :images
   has_many :comments
   has_many :comments, through: :comments
+  has_many :user_messages
+  has_many :promoter_messages
 end

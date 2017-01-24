@@ -87,7 +87,11 @@
         </div><!--top-bar-dark end here-->
         <!--navigation -->
         <!-- Static navbar -->
-        <div class="navbar navbar-default navbar-static-top yamm sticky" role="navigation">
+        <% if current_user %>
+            <div class="navbar navbar-default navbar-static-top yamm sticky special-background" role="navigation">
+        <% else %>
+            <div class="navbar navbar-default navbar-static-top yamm sticky" role="navigation">
+        <% end %>
             <div class="container">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">

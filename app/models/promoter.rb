@@ -9,4 +9,6 @@ class Promoter < ApplicationRecord
   has_many :guests, through: :guestlists
   has_many :images
   has_many :comments
+  has_many :promoter_messages
+  has_many :user_messages
 end

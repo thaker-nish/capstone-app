@@ -1,0 +1,36 @@
+class MessagesController < ApplicationController
+  def new
+    render 'new.html.erb'
+  end
+
+  def create
+    Message.create(
+      body: params[:body],
+      promoter_id: params[:promoter_id] || current_promoter.id,
+      user_id: params[:user_id] || current_user.id
+      )
+  end
+
+  def show
+    # @messages = UserMessage.where(promoter_id: params[:id] || current_promoter.id, user_id: params[:id] || current_user.id).order(created_at: :desc) && PromoterMessage.where(promoter_id: params[:id] || current_promoter.id, user_id: params[:id] || current_user.id).order(created_at: :desc)
+    if current_user
+      # Promoter.all.each do |promoter|
+
+      # end
+      @user_messages = UserMessage.where(user_id: current_user.id, promoter_id: params[:id]).order(created_at: :desc)
+      @promoter_messages = PromoterMessage.where(user_id: current_user.id, promoter_id: params[:id]).order(created_at: :desc)
+    elsif current_promoter
+      @user_messages = UserMessage.where(promoter_id: current_promoter.id, user_id: params[:id]).order(created_at: :desc)
+      @promoter_messages = PromoterMessage.where(promoter_id: current_promoter.id, user_id: params[:id]).order(created_at: :desc)
+    end
+    @messages = []
+    @user_messages.each do |user_message|
+      @messages.push({sender_name: user_message.user.name, body: user_message.body, created_at: user_message.created_at.strftime("%b %e, %l:%M %p")})
+    end
+    @promoter_messages.each do |promoter_message|
+      @messages.push({sender_name: promoter_message.promoter.name, body: promoter_message.body, created_at: promoter_message.created_at.strftime("%b %e, %l:%M %p")})
+      @messages = @messages.sort_by { |message| message[:created_at] }
+    end
+
+  end
+end
