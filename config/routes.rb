@@ -29,6 +29,6 @@ Rails.application.routes.draw do
 
   get '/messages/:id' => 'messages#show'
   post '/user_messages' => 'messages#create_user_message'
-  post '/promoter_messages' => 'messages#create_promotion_message'
+  post '/promoter_messages' => 'messages#create_promoter_message'
 
 end

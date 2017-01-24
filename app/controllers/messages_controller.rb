@@ -25,10 +25,10 @@ class MessagesController < ApplicationController
     end
     @messages = []
     @user_messages.each do |user_message|
-      @messages.push({sender_name: user_message.user.name, body: user_message.body, created_at: user_message.created_at.strftime("%b %e, %l:%M %p")})
+      @messages.push({sender_name: user_message.user.name, body: user_message.body, created_at: user_message.created_at.strftime("%e %b %Y %H:%M:%S%p")})
     end
     @promoter_messages.each do |promoter_message|
-      @messages.push({sender_name: promoter_message.promoter.name, body: promoter_message.body, created_at: promoter_message.created_at.strftime("%b %e, %l:%M %p")})
+      @messages.push({sender_name: promoter_message.promoter.name, body: promoter_message.body, created_at: promoter_message.created_at.strftime("%e %b %Y %H:%M:%S%p")})
       @messages = @messages.sort_by { |message| message[:created_at] }
     end
   end

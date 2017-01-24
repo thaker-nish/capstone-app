@@ -9,7 +9,6 @@
                          <%= form_tag '/user_messages', method: :post do  %>
                             <form role="form">
                                 <div class="form-group">
-                                    <label for="message">Comment</label>
                                     <%= text_area_tag :body, "", required:true, class:"form-control" %>
                                 </div>                      
                                 <div class="form-group">
@@ -18,7 +17,7 @@
                                 <div class="form-group">
                                     <%= hidden_field_tag :user_id, current_user.id %>
                                 </div>
-                                <button type="submit" class="btn btn-theme-bg btn-lg pull-right">Comment</button>
+                                <button style= 'margin-right: 25px; margin-bottom: 10px' type="submit" class="btn btn-theme-bg btn-lg pull-right">Send</button>
                             </form>
                             <%end%>
                         </div>
@@ -38,7 +37,7 @@
                                 <div class="form-group">
                                     <%= hidden_field_tag :user_id, params[:id] %>
                                 </div>
-                                <button type="submit" class="btn btn-theme-bg btn-lg pull-right">Comment</button>
+                                <button style= 'margin-right: 25px; margin-bottom: 10px' type="submit" class="btn btn-theme-bg btn-lg pull-right">Send</button>
                             </form>
                             <%end%>
                         </div>
