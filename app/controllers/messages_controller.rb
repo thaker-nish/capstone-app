@@ -1,4 +1,5 @@
 class MessagesController < ApplicationController
+  before_action :authenticate_user! unless :authenticate_promoter!
   def new
     render 'new.html.erb'
   end
@@ -31,6 +32,8 @@ class MessagesController < ApplicationController
       @messages.push({sender_name: promoter_message.promoter.name, body: promoter_message.body, created_at: promoter_message.created_at.strftime("%e %b %Y %H:%M:%S%p")})
       @messages = @messages.sort_by { |message| message[:created_at] }
     end
+    @user = User.find_by(id: params[:id])
+    @promoter = Promoter.find_by(id: params[:id])
   end
 
   def create_user_message
