@@ -18,6 +18,6 @@ class PromotersSessionsController < ApplicationController
   def destroy
     session[:promoter_id] = nil
     flash[:success] = 'Successfully logged out!'
-    redirect_to '/promoters_login'
+    redirect_to '/'
   end
 end
