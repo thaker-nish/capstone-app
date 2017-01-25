@@ -74,6 +74,7 @@
                     <table class="table table-hover">
                         <thead>
                             <tr>
+                                <th>Status</th>
                                 <th>Date</th>
                                 <th>Club</th>
                                 <th>User</th>
@@ -84,6 +85,7 @@
                          <%@promoter.guestlists.order("reservation_date").each do |guestlist|%>
                         <tbody>
                             <tr>
+                                <td><input type="checkbox"></td>
                                 <td><%=guestlist.reservation_date%></td>
                                 <td><%=guestlist.club.name%></td>
                                 <td><%=guestlist.user.name%></td>
