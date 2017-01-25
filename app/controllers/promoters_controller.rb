@@ -16,7 +16,7 @@ class PromotersController < ApplicationController
     if promoter.save
       session[:user_id] = promoter.id
       flash[:success] = 'Successfully created account!'
-      redirect_to '/'
+      redirect_to "/promoters/#{promoter.id}"
     else
       flash[:warning] = 'Invalid email or password!'
       redirect_to '/promoters_signup'
