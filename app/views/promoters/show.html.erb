@@ -65,6 +65,10 @@
                                 <td><div><a href="/users/<%=follower.id%>"><%=follower.name%></a></div></td>
                                 <td><%=follower.email%></td>
                                 <td><%=follower.phone%></td>
+                                <% if current_promoter === @promoter %>
+                                <td><a href="/messages/<%=follower.id%>"><button class="btn btn-theme-dark">Message</button></a></td>
+                                <%else%>
+                                <%end%>
                                 <%end%>
                             </tr>     
                       </tbody>

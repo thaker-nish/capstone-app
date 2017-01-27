@@ -1,7 +1,7 @@
 <% if current_user %>
-<h1><%=@promoter.name%></h1>
+<a href="/promoters/<%=@promoter.id%>"><h1><%=@promoter.name%></h1></a>
 <%else current_promoter %>
-<h1><%=@user.name%></h1>
+<a href="/users/<%=@user.id%>"><h1><%=@user.name%></h1></a>
 <%end%>
 <% @messages.each do |message| %>
   <p>(<%= message[:created_at] %>) <%=message[:sender_name] %>: <%=message[:body]%></p>
